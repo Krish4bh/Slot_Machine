@@ -1,8 +1,24 @@
-const maxLines = 3;
 
 // 1. Deposit some amount of money to play. 
 
 const prompt = require("prompt-sync")(); // Using the prompt-sync package for getting input from the user"
+
+const maxLines = 3;
+const cols = 3;
+
+const SYMBOLS_COUNT = {
+    A: 2,
+    B: 4,
+    C: 6,
+    D: 8
+}
+
+const SYMBOLS_VALUES = {
+    A: 5,
+    B: 4,
+    C: 3,
+    D: 2
+}
 
 const Deposit = () => {
 
@@ -59,6 +75,19 @@ const getBet = (balance, lines) => {
     }
 }
 
+// 4. Spin the Slot Machine.
+
+const spin = () => {
+    const symbols = [];
+    for (const [symbol, count] of Object.entries(SYMBOLS_COUNT)) { // Self Note: loop saves the object's keys and values in symbol and count variable which are structured as an array. 
+        for (let i = 0; i < count; i++) {
+            symbols.push(symbol)
+        }
+    }
+    console.log(symbols)
+}
+
+spin()
 const main = () => {
     let balance = Deposit()
     console.log(balance)
@@ -68,4 +97,4 @@ const main = () => {
     console.log(amountForBet)
 }
 
-main()
+// main()
