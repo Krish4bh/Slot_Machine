@@ -16,7 +16,7 @@ const Deposit = () => {
         if (isNaN(numberdepositAmount) || numberdepositAmount <= 0) {
             console.log(`Please enter a valid amount.`)
         } else {
-            return `You have deposited $${numberdepositAmount} amount to your account.`
+            return numberdepositAmount
         }
     }
 }
@@ -37,22 +37,22 @@ const getNumberOflines = () => {
         if (isNaN(numberOflines) || numberOflines <= 0 || numberOflines > 3) {
             console.log(`Please enter the valid value between 1-${maxLines}.`)
         } else {
-            return `${linesInNumber} lines are selected to place bet.`
+            return linesInNumber
         }
     }
 }
 
 // 3. Select the betting amount.
 
-const getBet = (balance) => {
+const getBet = (balance, lines) => {
 
     while (true) {
-        const bet = prompt("Enter the betting amount: $");
+        const bet = prompt("Enter the betting amount per line: $");
 
         const numberOfBet = parseFloat(bet);
 
-        if (isNaN(numberOfBet > balance || numberOfBet) || numberOfBet <= 0) {
-            console.log(`Please enter a valid amount or bet within the range of 0-balance.`)
+        if (isNaN(numberOfBet) || numberOfBet <= 0 || numberOfBet > balance / lines) {
+            console.log(`Please enter a valid amount or bet within the range of $0-balance.`)
         } else {
             return numberOfBet
         }
@@ -64,7 +64,7 @@ const main = () => {
     console.log(balance)
     const numberOflines = getNumberOflines()
     console.log(numberOflines)
-    const amountForBet = getBet(balance)
+    const amountForBet = getBet(balance, numberOflines)
     console.log(amountForBet)
 }
 
