@@ -84,10 +84,46 @@ const spin = () => {
             symbols.push(symbol)
         }
     }
-    console.log(symbols)
+    const reels = [];
+    for (var i = 0; i < cols; i++) {
+        reels.push([]);
+
+        const reelSymbols = [...symbols];
+        // The above statement copies the value stored in symbols variable to the reelSymbols variable.
+
+        for (var j = 0; j < maxLines; j++) {
+
+            const randomIndex = Math.floor(Math.random() * reelSymbols.length)
+            // The above statement generates a random number and stores it in the randomIndex variable.
+
+            const selectedSymbol = reelSymbols[randomIndex]
+            // The above statement uses the index generated and stored in reelsIndex variable to call the Symbol which is stored at that index in reelSymbols array. 
+
+            reels[i].push(selectedSymbol)
+            // The above statemnt pushes the symbol to the reels' array.
+
+            reelSymbols.splice(randomIndex, 1)
+            // And here it removes the selectedSymbol from the reelSymbols array by giving the index as the first parameter and the count. 
+        }
+    }
+    return reels;
 }
 
-spin()
+// 5. Transposing the reels
+
+const trnaspose = (reels) => {
+    const rows = []
+
+    for (let i = 0; i < maxLines; i++) {
+        rows.push([])
+        for (let j = 0; j = cols; j++) {
+            rows[i].push(reels[j][i])
+        }
+    }
+    return rows
+}
+
+
 const main = () => {
     let balance = Deposit()
     console.log(balance)
@@ -95,6 +131,8 @@ const main = () => {
     console.log(numberOflines)
     const amountForBet = getBet(balance, numberOflines)
     console.log(amountForBet)
+    const reels = spin()
+    console.log(reels)
 }
 
-// main()
+main()
